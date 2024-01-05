@@ -1,8 +1,6 @@
 import { ComponentProps, ReactNode } from "react";
 
-type ContainerProps = {
-    children: ReactNode;
-} & ComponentProps<"div">;
+type ContainerProps = ComponentProps<"div">;
 
 const Container = ({ children, className, ...props }: ContainerProps) => {
     return (
