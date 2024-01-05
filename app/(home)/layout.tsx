@@ -10,7 +10,7 @@ type LayoutPros = {
 const Layout = async ({ children }: LayoutPros) => {
     const session = await getServerSession(authOptions);
     if (session?.user) {
-        redirect("/private/members");
+        redirect("/private");
     } else {
         return <>{children}</>;
     }
