@@ -18,7 +18,7 @@ export default function Home() {
             redirect: false,
         });
         if (user?.ok) {
-            router.replace("/private/members");
+            router.replace("/private");
         } else {
             toast({
                 title: "Usuário e/ou senha inválidos",
