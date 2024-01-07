@@ -1,32 +1,9 @@
-"use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { type FormSchemaSignIn } from "@/lib/schemas";
 import SignInForm from "@/components/SignInForm";
-import { signIn } from "next-auth/react";
-import { toast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
 import LogoEbd from "@/public/logo.png";
 import Image from "next/image";
 
 export default function Home() {
-    const router = useRouter();
-    const onSubmit = async (values: FormSchemaSignIn) => {
-        const user = await signIn("credentials", {
-            email: values.email,
-            password: values.password,
-            redirect: false,
-        });
-        if (user?.ok) {
-            router.replace("/private");
-        } else {
-            toast({
-                title: "Usuário e/ou senha inválidos",
-                variant: "destructive",
-            });
-        }
-    };
-
     return (
         <main className="w-full min-h-screen flex flex-col items-center gap-4 bg-gradient-to-b from-slate-100 via-slate-100 to-neutral-500 p-6">
             <Image
@@ -42,7 +19,7 @@ export default function Home() {
                     <CardTitle>Faça o Login</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <SignInForm onSubmit={onSubmit} />
+                    <SignInForm />
                 </CardContent>
             </Card>
         </main>
