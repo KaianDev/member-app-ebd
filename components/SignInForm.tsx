@@ -7,22 +7,24 @@ import { Input } from "@/components/ui/input";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { type FormSchemaSignIn, formSchemaSignIn } from "@/lib/schemas";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LucideEye, LucideEyeOff } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { toast } from "./ui/use-toast";
 
-type Props = {
-    onSubmit: (values: FormSchemaSignIn) => void;
-};
+import { type FormSchemaSignIn, formSchemaSignIn } from "@/lib/schemas";
 
-const SignInForm = ({ onSubmit }: Props) => {
+const SignInForm = () => {
     const [type, setType] = useState<"password" | "text">("password");
+
+    const router = useRouter();
+
     const form = useForm<FormSchemaSignIn>({
         resolver: zodResolver(formSchemaSignIn),
         defaultValues: {
@@ -30,6 +32,22 @@ const SignInForm = ({ onSubmit }: Props) => {
             password: "",
         },
     });
+
+    const onSubmit = async (values: FormSchemaSignIn) => {
+        const user = await signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            redirect: false,
+        });
+        if (user?.ok) {
+            router.replace("/private");
+        } else {
+            toast({
+                title: "Usuário e/ou senha inválidos",
+                variant: "destructive",
+            });
+        }
+    };
 
     const handleToggleTypePassword = () => {
         setType((prev) => (prev === "password" ? "text" : "password"));
@@ -66,6 +84,7 @@ const SignInForm = ({ onSubmit }: Props) => {
                                         type={type}
                                         {...field}
                                         placeholder="Digite sua senha"
+                                        autoComplete="off"
                                     />
                                     <Button
                                         type="button"
