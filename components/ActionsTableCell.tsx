@@ -22,6 +22,7 @@ import {
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { Member } from "@/types/Member";
+import { getMemberName } from "@/helpers/getMemberName";
 
 type ActionsTableCellProps = {
   member: Member;
@@ -32,6 +33,8 @@ const ActionsTableCell = ({
   member,
   onDeleteMember,
 }: ActionsTableCellProps) => {
+  const memberName = getMemberName(member.name);
+
   return (
     <TableCell>
       <DropdownMenu>
@@ -40,7 +43,7 @@ const ActionsTableCell = ({
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <DropdownMenuLabel>{member.name.split(" ")[0]}</DropdownMenuLabel>
+          <DropdownMenuLabel>{memberName}</DropdownMenuLabel>
 
           <Link href={`/private/update/${member.id}`}>
             <DropdownMenuItem className="w-full justify-between">
@@ -57,24 +60,21 @@ const ActionsTableCell = ({
               </DropdownMenuItem>
             </DialogTrigger>
 
-            <DialogContent>
+            <DialogContent className="max-w-[90%] sm:max-w-lg border-2 border-red-500">
               <DialogHeader>
-                <DialogTitle>
-                  {`Gostaria de deletar o membro ${member.name}?`}
+                <DialogTitle className="text-left">
+                  {`Gostaria de deletar o membro ${memberName}?`}
                 </DialogTitle>
-
-                <DialogDescription>
+                <DialogDescription className="text-left">
                   Essa ação não pode ser desfeita.
                 </DialogDescription>
               </DialogHeader>
-
-              <DialogFooter>
+              <DialogFooter className="gap-2 flex-row justify-end sm:gap-0">
                 <DialogClose
                   onClick={() => onDeleteMember(member.id)}
                   className={cn(buttonVariants({ variant: "destructive" }))}>
                   Deletar
                 </DialogClose>
-
                 <DialogClose className={cn(buttonVariants())}>
                   Cancelar
                 </DialogClose>

@@ -56,8 +56,8 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
   };
 
   return (
-    <>
-      <div className="flex items-center gap-4">
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-2">
         <Input
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
@@ -180,7 +180,7 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
           </Button>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

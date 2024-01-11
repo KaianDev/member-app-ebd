@@ -44,7 +44,7 @@ function Page() {
         <MemberTable members={members} />
       )}
       {filteredMembers.status && filteredMembers.members.length > 0 && (
-        <MemberTable members={filteredMembers.members} />
+        <MemberTable members={filteredMembers.members} filtered={true} />
       )}
 
       {members.length === 0 && (

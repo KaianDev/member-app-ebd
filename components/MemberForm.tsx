@@ -31,7 +31,7 @@ const MemberForm = ({ form, onSubmit }: MemberFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-6">
           <FormField
             control={form.control}
             name="name"
@@ -151,7 +151,7 @@ const MemberForm = ({ form, onSubmit }: MemberFormProps) => {
             )}
           />
         </div>
-        <div className="flex space-x-2">
+        <div className="flex gap-2 pt-4 pb-8">
           <Button type="submit">Confirmar</Button>
           <Link
             href="/private"

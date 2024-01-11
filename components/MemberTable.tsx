@@ -24,9 +24,10 @@ import Title from "./Title";
 
 type MemberTableProps = {
   members: Member[];
+  filtered?: boolean;
 };
 
-const MemberTable = ({ members }: MemberTableProps) => {
+const MemberTable = ({ members, filtered }: MemberTableProps) => {
   const member = useDelMember();
 
   const handleDeleteMember = async (id: number) => {
@@ -46,8 +47,11 @@ const MemberTable = ({ members }: MemberTableProps) => {
 
   return (
     <div className="py-3">
-      <Title>Lista de Membros</Title>
-      <small className="block text-right">Quantidade:{members.length}</small>
+      <Title className="mb-2">Lista de Membros</Title>
+      <div className="flex justify-between">
+        {filtered && <small>Resultados</small>}
+        <small className="ml-auto">Quantidade:{members.length}</small>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -64,9 +68,9 @@ const MemberTable = ({ members }: MemberTableProps) => {
             <TableRow key={member.id}>
               <TableCell>
                 <div className="flex flex-col">
-                  <div className=" font-semibold">
+                  <div className="flex gap-1 font-semibold">
                     <span>{getGender(member.sex)}</span>
-                    <span className="truncate"> {member.name}</span>
+                    <span className="truncate text-sm">{member.name}</span>
                   </div>
                   <strong className="text-xs">
                     {member.isTeacher && "Professor(a)"}
