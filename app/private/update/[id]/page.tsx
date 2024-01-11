@@ -4,7 +4,7 @@ import LoadingData from "@/components/LoadingData";
 import Title from "@/components/Title";
 import { UpdateFormArea } from "@/components/UpdateFormArea";
 import { buttonVariants } from "@/components/ui/button";
-import { useOneMember } from "@/api/queries";
+import { useOneMember } from "@/data/queries";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 

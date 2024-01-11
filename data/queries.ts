@@ -1,4 +1,4 @@
-import { api } from "@/api/api";
+import { api } from "@/data/api";
 import { useQuery } from "@tanstack/react-query";
 
 export const useMemberList = () => {

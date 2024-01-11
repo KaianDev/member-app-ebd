@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/api/api";
+import { api } from "@/data/api";
 import Container from "@/components/Container";
 import MemberForm from "@/components/MemberForm";
 import Title from "@/components/Title";

@@ -1,4 +1,4 @@
-import { api } from "@/api/api";
+import { api } from "@/data/api";
 import { queryClient } from "@/providers/tanstackProvider";
 import { useMutation } from "@tanstack/react-query";
 
@@ -12,5 +12,3 @@ export const useDelMember = () => {
     },
   });
 };
-
-

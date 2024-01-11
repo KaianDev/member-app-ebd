@@ -6,7 +6,7 @@ import { FormMemberSchema, formMemberSchema } from "@/lib/schemas";
 import { booleanToString } from "@/helpers/booleanToString";
 import { getDateToFormInput } from "@/helpers/getDateToFormInput";
 import MemberForm from "./MemberForm";
-import { api } from "@/api/api";
+import { api } from "@/data/api";
 import { toast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
 

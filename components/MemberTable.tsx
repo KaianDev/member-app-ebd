@@ -15,11 +15,11 @@ import { showBoolean } from "@/helpers/showBoolean";
 import { getBirthDate } from "@/helpers/getBirthDate";
 import { getClass } from "@/helpers/getClass";
 import { getGender } from "@/helpers/getGender";
-import { api } from "@/api/api";
+import { api } from "@/data/api";
 import { toast } from "./ui/use-toast";
 import ActionsTableCell from "./ActionsTableCell";
 import { useRouter } from "next/navigation";
-import { useDelMember } from "@/api/mutations";
+import { useDelMember } from "@/data/mutations";
 
 type MemberTableProps = {
   members: Member[];

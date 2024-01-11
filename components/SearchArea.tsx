@@ -3,7 +3,7 @@
 import { LucideSearch } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { api } from "@/api/api";
+import { api } from "@/data/api";
 import { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Label } from "./ui/label";

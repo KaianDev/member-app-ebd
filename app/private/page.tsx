@@ -4,7 +4,7 @@ import LoadingData from "@/components/LoadingData";
 import MemberTable from "@/components/MemberTable";
 import SearchArea from "@/components/SearchArea";
 import Title from "@/components/Title";
-import { useMemberList } from "@/api/queries";
+import { useMemberList } from "@/data/queries";
 
 function Page() {
   const { data: members, isFetching } = useMemberList();
