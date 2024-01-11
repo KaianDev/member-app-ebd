@@ -20,6 +20,7 @@ import { toast } from "./ui/use-toast";
 import ActionsTableCell from "./ActionsTableCell";
 import { useRouter } from "next/navigation";
 import { useDelMember } from "@/data/mutations";
+import Title from "./Title";
 
 type MemberTableProps = {
   members: Member[];
@@ -45,6 +46,7 @@ const MemberTable = ({ members }: MemberTableProps) => {
 
   return (
     <div className="py-3">
+      <Title>Lista de Membros</Title>
       <small className="block text-right">Quantidade:{members.length}</small>
       <Table>
         <TableHeader>

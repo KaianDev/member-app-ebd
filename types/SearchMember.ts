@@ -6,3 +6,4 @@ export type SearchMember = {
   isTeacher?: "yes" | "no";
   isMarried?: "yes" | "no";
 };
+
