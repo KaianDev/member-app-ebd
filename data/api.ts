@@ -4,7 +4,7 @@ import { SearchMember } from "@/types/SearchMember";
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "https://api-ebd-iprab.vercel.app",
   headers: {
     origin: process.env.ORIGIN_URL,
   },
