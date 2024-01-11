@@ -61,7 +61,7 @@ function Page() {
         </div>
       )}
 
-      {filteredMembers.members.length === 0 && (
+      {filteredMembers.members.length === 0 && filteredMembers.status && (
         <div>
           <Title>Nenhum resultado foi encontrado para essa consulta</Title>
           <p className="text-center text-slate-600">
