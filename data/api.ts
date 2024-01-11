@@ -19,7 +19,6 @@ export const api = {
 
   getAllMembers: async (): Promise<Member[] | undefined> => {
     try {
-      console.log(http);
       const results = await http.get("/members");
       return results.data as Member[];
     } catch (error) {}
