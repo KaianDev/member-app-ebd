@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Home() {
     return (
-        <main className="w-full min-h-screen flex flex-col items-center gap-4 bg-gradient-to-b from-slate-100 via-slate-100 to-neutral-500 p-6">
+        <main className="w-full min-h-dvh flex flex-col items-center gap-4 bg-gradient-to-b from-slate-100 via-slate-100 to-neutral-500 p-6">
             <Image
                 src={LogoEbd}
                 alt="Logo EBD"
