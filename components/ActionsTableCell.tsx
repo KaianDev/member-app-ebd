@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { TableCell } from "./ui/table";
-import { LucideEdit, LucideTrash } from "lucide-react";
-import { Dialog } from "@radix-ui/react-dialog";
+import { LucideEdit, LucideMoreVertical, LucideTrash } from "lucide-react";
+
 import {
+  Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,
@@ -11,6 +12,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { Member } from "@/types/Member";
@@ -26,39 +34,55 @@ const ActionsTableCell = ({
 }: ActionsTableCellProps) => {
   return (
     <TableCell>
-      <div className="flex gap-2 justify-end">
-        <Link
-          className={cn(buttonVariants())}
-          href={`/private/update/${member.id}`}>
-          <LucideEdit size={16} />
-        </Link>
-        <Dialog>
-          <DialogTrigger
-            className={cn(buttonVariants({ variant: "destructive" }))}>
-            <LucideTrash size={16} />
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>
-                {`Gostaria de deletar o membro ${member.name}?`}
-              </DialogTitle>
-              <DialogDescription>
-                Essa ação não pode ser desfeita.
-              </DialogDescription>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <LucideMoreVertical size={20} />
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent>
+          <DropdownMenuLabel>{member.name.split(" ")[0]}</DropdownMenuLabel>
+
+          <Link href={`/private/update/${member.id}`}>
+            <DropdownMenuItem className="w-full justify-between">
+              Editar <LucideEdit size={16} />
+            </DropdownMenuItem>
+          </Link>
+
+          <Dialog>
+            <DialogTrigger className="w-full">
+              <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="w-full justify-between">
+                Apagar <LucideTrash size={16} />
+              </DropdownMenuItem>
+            </DialogTrigger>
+
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>
+                  {`Gostaria de deletar o membro ${member.name}?`}
+                </DialogTitle>
+
+                <DialogDescription>
+                  Essa ação não pode ser desfeita.
+                </DialogDescription>
+              </DialogHeader>
+
               <DialogFooter>
                 <DialogClose
                   onClick={() => onDeleteMember(member.id)}
                   className={cn(buttonVariants({ variant: "destructive" }))}>
                   Deletar
                 </DialogClose>
+
                 <DialogClose className={cn(buttonVariants())}>
                   Cancelar
                 </DialogClose>
               </DialogFooter>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-      </div>
+            </DialogContent>
+          </Dialog>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </TableCell>
   );
 };
