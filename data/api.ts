@@ -4,7 +4,7 @@ import { SearchMember } from "@/types/SearchMember";
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: "https://api-ebd-iprab.vercel.app",
+  baseURL: process.env.NEXT_PUBLIC_BASE_API,
   headers: {
     origin: process.env.ORIGIN_URL,
   },
@@ -13,7 +13,6 @@ export const http = axios.create({
 export const api = {
   login: async (data: FormSchemaSignIn) => {
     const results = await http.post("/login", data);
-    console.log(results);
     return results.data;
   },
 
