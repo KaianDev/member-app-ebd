@@ -15,14 +15,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+
 import { cn } from "@/lib/utils";
 import Divider from "./Divider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { BIRTH_MONTH } from "@/constants/birthMonth";
 
 type SearchAreaProps = {
   setMembers: (filteredMembers: FilteredMembers) => void;
@@ -30,10 +33,13 @@ type SearchAreaProps = {
 };
 
 const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
-  const [searchName, setSearchName] = useState("");
+  const [searchName, setSearchName] = useState<string | undefined>();
   const [searchGender, setSearchGender] = useState<"F" | "M">();
   const [searchIsTeacher, setSearchIsTeacher] = useState<"yes" | "no">();
   const [searchHasChild, setSearchHasChild] = useState<"yes" | "no">();
+  const [searchBirthMonth, setSearchBirthMonth] = useState<
+    string | undefined
+  >();
 
   const handleSearch = async () => {
     const results = await api.searchMember({
@@ -41,14 +47,21 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
       sex: searchGender,
       isTeacher: searchIsTeacher,
       hasChild: searchHasChild,
+      birthMonth: searchBirthMonth,
     });
-    console.log(results);
+
     if (results) {
       setMembers({ members: results, status: true });
     }
   };
 
+  const onChangeBirthMonth = (value: string) => {
+    setSearchBirthMonth(value);
+  };
+
   const handleClearFilter = () => {
+    setSearchName("");
+    setSearchBirthMonth(undefined);
     setSearchGender(undefined);
     setSearchHasChild(undefined);
     setSearchIsTeacher(undefined);
@@ -76,6 +89,18 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
           </SheetTrigger>
           <SheetContent side="left" className="flex flex-col">
             <SheetTitle>Filtros</SheetTitle>
+            <Label>Mês de aniversário</Label>
+            <Select onValueChange={onChangeBirthMonth}>
+              <SelectTrigger>
+                <SelectValue placeholder="Selecione..." />
+              </SelectTrigger>
+              <SelectContent>
+                {BIRTH_MONTH.map((month) => (
+                  <SelectItem value={month}>{month}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
             <RadioGroup
               defaultValue={searchGender}
               value={searchGender}
@@ -160,6 +185,8 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
                 </div>
               </div>
             </RadioGroup>
+
+            <Divider />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
               <SheetClose
