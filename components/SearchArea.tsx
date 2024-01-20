@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { BIRTH_MONTH } from "@/constants/birthMonth";
+import { sortByDay } from "@/helpers/sortByDay";
 
 type SearchAreaProps = {
   setMembers: (filteredMembers: FilteredMembers) => void;
@@ -51,6 +52,7 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
     });
 
     if (results) {
+      sortByDay(results);
       setMembers({ members: results, status: true });
     }
   };
