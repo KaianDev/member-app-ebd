@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/data/api";
+import { request } from "@/data/request";
 import Container from "@/components/Container";
 import MemberForm from "@/components/MemberForm";
 import Title from "@/components/Title";
@@ -17,7 +17,7 @@ const Page = () => {
   });
 
   const handleMemberRegister = async (values: FormMemberSchema) => {
-    const result = await api.createMember(values);
+    const result = await request.createMember(values);
     if (result) {
       toast({
         title: "Novo membro adicionado!",

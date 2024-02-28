@@ -6,7 +6,7 @@ import { FormMemberSchema, formMemberSchema } from "@/lib/schemas";
 import { booleanToString } from "@/helpers/booleanToString";
 import { getDateToFormInput } from "@/helpers/getDateToFormInput";
 import MemberForm from "./MemberForm";
-import { api } from "@/data/api";
+import { request } from "@/data/request";
 import { toast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
 
@@ -29,7 +29,7 @@ export const UpdateFormArea = ({ member }: UpdateFormAreaProps) => {
   });
 
   const handleMemberUpdate = async (values: FormMemberSchema) => {
-    const result = await api.updateMember(member.id, values);
+    const result = await request.updateMember(member.id, values);
     if (result) {
       toast({
         title: "Membro atualizado com sucesso!",

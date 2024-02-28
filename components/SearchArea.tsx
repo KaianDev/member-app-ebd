@@ -3,7 +3,7 @@
 import { LucideFilter, LucideSearch } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import { Input } from "./ui/input";
-import { api } from "@/data/api";
+import { request } from "@/data/request";
 import { useState } from "react";
 import { FilteredMembers } from "@/types/FilteredMembers";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
@@ -43,7 +43,7 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
   >();
 
   const handleSearch = async () => {
-    const results = await api.searchMember({
+    const results = await request.searchMember({
       name: searchName,
       sex: searchGender,
       isTeacher: searchIsTeacher,
@@ -108,21 +108,24 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
               value={searchGender}
               onValueChange={(e) =>
                 setSearchGender((prev) => (e === "M" || e === "F" ? e : prev))
-              }>
+              }
+            >
               <Label>Gênero</Label>
               <div className="grid grid-cols-2">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem
                     value="M"
                     checked={!!searchGender && searchGender === "M"}
-                    id="sGenderM"></RadioGroupItem>
+                    id="sGenderM"
+                  ></RadioGroupItem>
                   <Label htmlFor="sGenderM">Masculino</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem
                     checked={!!searchGender && searchGender === "F"}
                     value="F"
-                    id="sGenderF"></RadioGroupItem>
+                    id="sGenderF"
+                  ></RadioGroupItem>
                   <Label htmlFor="sGenderF">Feminino</Label>
                 </div>
               </div>
@@ -136,21 +139,24 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
                 setSearchHasChild(
                   (prev) => (prev = e === "yes" || e === "no" ? e : prev)
                 )
-              }>
+              }
+            >
               <Label>Tem filho(s)?</Label>
               <div className="grid grid-cols-2">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem
                     checked={!!searchHasChild && searchHasChild === "yes"}
                     value="yes"
-                    id="sHasChildYes"></RadioGroupItem>
+                    id="sHasChildYes"
+                  ></RadioGroupItem>
                   <Label htmlFor="sHasChildYes">Sim</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem
                     checked={!!searchHasChild && searchHasChild === "no"}
                     value="no"
-                    id="sHasChildNo"></RadioGroupItem>
+                    id="sHasChildNo"
+                  ></RadioGroupItem>
                   <Label htmlFor="sHasChildNo">Não</Label>
                 </div>
               </div>
@@ -164,25 +170,24 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
                 setSearchIsTeacher(
                   (prev) => (prev = e === "yes" || e === "no" ? e : prev)
                 )
-              }>
+              }
+            >
               <Label>É professor(a)?</Label>
               <div className="grid grid-cols-2">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem
                     value="yes"
                     id="sTeacherYes"
-                    checked={
-                      !!searchIsTeacher && searchIsTeacher === "yes"
-                    }></RadioGroupItem>
+                    checked={!!searchIsTeacher && searchIsTeacher === "yes"}
+                  ></RadioGroupItem>
                   <Label htmlFor="sTeacherYes">Sim</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem
                     value="no"
                     id="sTeacherNo"
-                    checked={
-                      !!searchIsTeacher && searchIsTeacher === "no"
-                    }></RadioGroupItem>
+                    checked={!!searchIsTeacher && searchIsTeacher === "no"}
+                  ></RadioGroupItem>
                   <Label htmlFor="sTeacherNo">Não</Label>
                 </div>
               </div>
@@ -193,7 +198,8 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
               <SheetClose
                 className={cn(buttonVariants())}
-                onClick={handleSearch}>
+                onClick={handleSearch}
+              >
                 Filtrar
               </SheetClose>
               <Button onClick={handleClearFilter} variant="outline">
