@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { formSchemaSignIn } from "./schemas";
-import { api } from "@/data/api";
+import { request } from "@/data/request";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,7 +16,7 @@ export const authOptions: NextAuthOptions = {
 
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
-          const user = await api.login({ email, password });
+          const user = await request.login({ email, password });
           if (user) {
             return user;
           }
