@@ -1,7 +1,8 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { formSchemaSignIn } from "./schemas";
 import { request } from "@/data/request";
+import { decode } from "jsonwebtoken";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,7 +17,8 @@ export const authOptions: NextAuthOptions = {
 
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
-          const user = await request.login({ email, password });
+          const user = (await request.login({ email, password })) as User;
+
           if (user) {
             return user;
           }
@@ -25,7 +27,30 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  callbacks: {},
+
+  session: {},
+
+  callbacks: {
+    async jwt({ user, token }) {
+      if (user) {
+        const { exp: accessTokenExpires } = decode(user.accessToken) as {
+          exp: number;
+        };
+        const accessToken = user.accessToken;
+        token.accessToken = accessToken;
+        token.accessTokenExpires = accessTokenExpires;
+      }
+      console.log({ token });
+      return token;
+    },
+
+    async session({ session, token }) {
+      session.user.accessToken = token.accessToken as string;
+
+      console.log({ session });
+      return session;
+    },
+  },
   pages: {
     signIn: "/",
   },

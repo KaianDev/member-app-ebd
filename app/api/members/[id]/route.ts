@@ -1,3 +1,4 @@
+import { getAccessToken } from "@/helpers/getAccessToken";
 import { backendAPI } from "@/lib/api";
 import { FormMemberSchema } from "@/lib/schemas";
 import { Member } from "@/types/Member";
@@ -11,9 +12,14 @@ interface RequestParams {
   };
 }
 
-export const GET = async (_: NextRequest, { params }: RequestParams) => {
+export const GET = async (request: NextRequest, { params }: RequestParams) => {
   try {
-    const results = await backendAPI.get(`/members/${params.id}`);
+    const accessToken = await getAccessToken(request);
+    const results = await backendAPI.get(`/members/${params.id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     return new Response(JSON.stringify(results.data as Member));
   } catch (error) {
     const axiosError = error as AxiosError;
@@ -30,7 +36,12 @@ export const GET = async (_: NextRequest, { params }: RequestParams) => {
 export const PUT = async (request: NextRequest, { params }: RequestParams) => {
   try {
     const data = (await request.json()) as FormMemberSchema;
-    const results = await backendAPI.put(`/members/${params.id}`, data);
+    const accessToken = await getAccessToken(request);
+    const results = await backendAPI.put(`/members/${params.id}`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     return new Response(JSON.stringify(results.data as Member));
   } catch (error) {
     const axiosError = error as AxiosError;
@@ -44,9 +55,17 @@ export const PUT = async (request: NextRequest, { params }: RequestParams) => {
   }
 };
 
-export const DELETE = async (_: NextRequest, { params }: RequestParams) => {
+export const DELETE = async (
+  request: NextRequest,
+  { params }: RequestParams
+) => {
   try {
-    const results = await backendAPI.delete(`/members/${params.id}`);
+    const accessToken = await getAccessToken(request);
+    const results = await backendAPI.delete(`/members/${params.id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     return new Response(JSON.stringify(results.data));
   } catch (error) {
     const axiosError = error as AxiosError;
