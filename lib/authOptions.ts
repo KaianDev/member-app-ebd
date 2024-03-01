@@ -40,14 +40,11 @@ export const authOptions: NextAuthOptions = {
         token.accessToken = accessToken;
         token.accessTokenExpires = accessTokenExpires;
       }
-      console.log({ token });
       return token;
     },
 
     async session({ session, token }) {
       session.user.accessToken = token.accessToken as string;
-
-      console.log({ session });
       return session;
     },
   },

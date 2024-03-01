@@ -2,6 +2,7 @@
 import { ReactNode } from "react";
 import { SessionAuthProvider } from "./sessionAuthProvider";
 import { TanstackProvider } from "./tanstackProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 type ProvidersProps = {
   children: ReactNode;
@@ -9,8 +10,10 @@ type ProvidersProps = {
 
 export const Providers = ({ children }: ProvidersProps) => {
   return (
-    <SessionAuthProvider>
-      <TanstackProvider>{children}</TanstackProvider>
-    </SessionAuthProvider>
+    <ThemeProvider attribute="class" defaultTheme="system">
+      <SessionAuthProvider>
+        <TanstackProvider>{children}</TanstackProvider>
+      </SessionAuthProvider>
+    </ThemeProvider>
   );
 };

@@ -63,7 +63,10 @@ const MemberTable = ({ members, filtered }: MemberTableProps) => {
         </TableHeader>
         <TableBody>
           {members.map((member) => (
-            <TableRow key={member.id}>
+            <TableRow
+              className="dark:even:bg-zinc-800 even:bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700"
+              key={member.id}
+            >
               <TableCell>
                 <div className="flex flex-col">
                   <div className="flex gap-1 font-semibold">
