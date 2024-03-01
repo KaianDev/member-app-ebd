@@ -73,17 +73,6 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
-        <Input
-          value={searchName}
-          onChange={(e) => setSearchName(e.target.value)}
-          type="search"
-          placeholder="Informe o nome do membro aqui"
-        />
-        <Button onClick={handleSearch}>
-          <LucideSearch size={20} />
-        </Button>
-      </div>
-      <div className="flex justify-between">
         <Sheet>
           <SheetTrigger className={cn(buttonVariants())}>
             <LucideFilter size={16} />
@@ -208,7 +197,17 @@ const SearchArea = ({ setMembers, hasFilter }: SearchAreaProps) => {
             </div>
           </SheetContent>
         </Sheet>
-
+        <Input
+          value={searchName}
+          onChange={(e) => setSearchName(e.target.value)}
+          type="search"
+          placeholder="Informe o nome do membro aqui"
+        />
+        <Button onClick={handleSearch}>
+          <LucideSearch size={20} />
+        </Button>
+      </div>
+      <div className="flex justify-between">
         {hasFilter && (
           <Button onClick={handleClearFilter} variant="outline">
             Limpar filtros

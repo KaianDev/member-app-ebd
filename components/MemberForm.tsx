@@ -30,8 +30,8 @@ type MemberFormProps = {
 const MemberForm = ({ form, onSubmit }: MemberFormProps) => {
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-        <div className="grid md:grid-cols-2 gap-8 sm:gap-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-20 mt-10">
+        <div className="grid md:grid-cols-2 gap-14 sm:gap-10">
           <FormField
             control={form.control}
             name="name"
@@ -66,7 +66,8 @@ const MemberForm = ({ form, onSubmit }: MemberFormProps) => {
                 <FormLabel>Gênero</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecione..." />
@@ -89,7 +90,8 @@ const MemberForm = ({ form, onSubmit }: MemberFormProps) => {
                 <FormLabel>É casado(a)?</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecione..." />
@@ -112,7 +114,8 @@ const MemberForm = ({ form, onSubmit }: MemberFormProps) => {
                 <FormLabel>Tem filho(s)?</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecione..." />
@@ -135,7 +138,8 @@ const MemberForm = ({ form, onSubmit }: MemberFormProps) => {
                 <FormLabel>É professor(a)?</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecione..." />
@@ -155,7 +159,8 @@ const MemberForm = ({ form, onSubmit }: MemberFormProps) => {
           <Button type="submit">Confirmar</Button>
           <Link
             href="/private"
-            className={cn(buttonVariants({ variant: "destructive" }))}>
+            className={cn(buttonVariants({ variant: "destructive" }))}
+          >
             Cancelar
           </Link>
         </div>
