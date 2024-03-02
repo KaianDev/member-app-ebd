@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <header className="shadow-md bg-gradient-to-t from-slate-100 via-slate-100 to-neutral-500 dark:from-zinc-800">
       <Container className="py-3 px-6 flex justify-between items-center">
-        <Link href="/private">
+        <Link href="/private" replace={true}>
           <Image
             src={LogoEBD}
             alt="Logo EBD"

@@ -19,6 +19,7 @@ import { toast } from "./ui/use-toast";
 import ActionsTableCell from "./ActionsTableCell";
 import { useDelMember } from "@/data/mutations";
 import Title from "./Title";
+import { useRouter } from "next/navigation";
 
 type MemberTableProps = {
   members: Member[];
@@ -27,18 +28,12 @@ type MemberTableProps = {
 
 const MemberTable = ({ members, filtered }: MemberTableProps) => {
   const member = useDelMember();
+  const navigate = useRouter();
 
   const handleDeleteMember = async (id: number) => {
     await member.mutateAsync(id, {
       onSuccess() {
-        toast({ title: "Membro deletado com sucesso!", duration: 500 });
-      },
-      onError() {
-        toast({
-          title: "Ocorreu um erro!",
-          variant: "destructive",
-          duration: 500,
-        });
+        navigate.replace("/");
       },
     });
   };
@@ -65,8 +60,7 @@ const MemberTable = ({ members, filtered }: MemberTableProps) => {
           {members.map((member) => (
             <TableRow
               className="dark:even:bg-zinc-800 even:bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700"
-              key={member.id}
-            >
+              key={member.id}>
               <TableCell>
                 <div className="flex flex-col">
                   <div className="flex gap-1 font-semibold">
