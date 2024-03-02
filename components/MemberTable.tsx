@@ -33,7 +33,7 @@ const MemberTable = ({ members, filtered }: MemberTableProps) => {
   const handleDeleteMember = async (id: number) => {
     await member.mutateAsync(id, {
       onSuccess() {
-        navigate.replace("/");
+        navigate.replace("/private");
       },
     });
   };
