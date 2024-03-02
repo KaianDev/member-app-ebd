@@ -19,15 +19,6 @@
 </p>
 
 <h2 id="technologies">💻 Technologies</h2>
-
-- nodejs
-- express
-- typescript
-- prismaORM
-- postgres
-- zod
-- bcrypt
-- jsonwebtoken
 - nextjs
 - react
 - tailwindcss
@@ -35,6 +26,7 @@
 - tanstack-query
 - react-hook-form
 - next-auth
+- zod
 
 <h2 id="started">🚀 Getting started</h2>
 
